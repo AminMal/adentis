@@ -13,4 +13,6 @@ trait OrderItemsRepo {
 
   def getOrdersItemsAndProductsWithinDateRange(start: LocalDateTime, end: LocalDateTime): Future[Seq[(Order, Item, DomainProduct)]]
 
+  def upsert(orderItems: Seq[OrderItem]): Future[Int]
+
 }

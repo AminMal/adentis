@@ -10,7 +10,7 @@ object OrderTable {
 
   import DatabaseProfile.profile.api._
 
-  private final class Orders(tag: Tag) extends Table[Order](tag, "orders") {
+  private[repo] final class Orders(tag: Tag) extends Table[Order](tag, "orders") {
     def id:                 Rep[Option[Long]]           = column("id", O.AutoInc, O.PrimaryKey, O.Unique)
     def customerName:       Rep[String]                 = column("customer_name")
     def customerContact:    Rep[String]                 = column("customer_contact")

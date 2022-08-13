@@ -7,12 +7,11 @@ import repo.table.OrderTable
 import java.time.LocalDateTime
 import scala.concurrent.Future
 
-@Singleton
 class OrderRepoImpl extends OrderRepo {
   import repo.DatabaseProfile.profile.api._
 
   private final val Orders = OrderTable.Orders
-  private final val db = bootstrap.Bootstrap.db
+  private final val db = bootstrap.db
 
   override def getById(id: Long): Future[Option[Order]] = db.run {
     Orders.filter(_.id === id)

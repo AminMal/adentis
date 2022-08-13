@@ -7,13 +7,15 @@ import repo.table.{ItemTable, OrderItemTable, OrderTable, ProductTable}
 import java.time.LocalDateTime
 import scala.concurrent.Future
 
-@Singleton
 class OrderItemsRepoImpl extends OrderItemsRepo {
 
   import repo.DatabaseProfile.profile.api._
+
   private final val OrderItems = OrderItemTable.OrderItems
-  private final val db = bootstrap.Bootstrap.db
-  import bootstrap.Bootstrap.ec
+  private final val db = bootstrap.db
+
+  import bootstrap.ec
+
   private final val Items = ItemTable.Items
   private final val Products = ProductTable.Products
   private final val Orders = OrderTable.Orders
@@ -45,7 +47,10 @@ class OrderItemsRepoImpl extends OrderItemsRepo {
         case (((_, order), item), product) =>
           (order, item, product)
       }.result
-
   }
+
+  def upsert(orderItems: Seq[OrderItem]): Future[Int] = db.run {
+    DBIO.sequence(orderItems.map(OrderItems.insertOrUpdate)).transactionally
+  }.map(_.sum)
 
 }

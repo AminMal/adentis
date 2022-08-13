@@ -6,7 +6,7 @@ import repo.table.ProductTable
 class ProductRepoImpl extends ProductRepo {
 
   import repo.DatabaseProfile.profile.api._
-  val db = bootstrap.Bootstrap.db
-  val Products = ProductTable.Products
+  private final val db = bootstrap.db
+  private final val Products = ProductTable.Products
 
 }

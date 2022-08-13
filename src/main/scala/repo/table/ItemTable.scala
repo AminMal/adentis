@@ -10,7 +10,7 @@ object ItemTable {
 
   import DatabaseProfile.profile.api._
 
-  private final class Items(tag: Tag) extends Table[Item](tag, "items") {
+  private[repo] final class Items(tag: Tag) extends Table[Item](tag, "items") {
     def id: Rep[Option[Long]] = column("id", O.AutoInc, O.PrimaryKey, O.Unique)
 
     def taxAmount: Rep[Double] = column("tax_amount")

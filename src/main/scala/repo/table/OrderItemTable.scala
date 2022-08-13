@@ -8,7 +8,7 @@ object OrderItemTable {
 
   import DatabaseProfile.profile.api._
 
-  private final class OrderItems(tag: Tag) extends Table[OrderItem](tag, "order_items") {
+  private[repo] final class OrderItems(tag: Tag) extends Table[OrderItem](tag, "order_items") {
     def orderId:  Rep[Long] = column("order_id")
     def itemId:   Rep[Long] = column("item_id")
 
