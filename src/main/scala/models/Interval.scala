@@ -9,12 +9,12 @@ case class Interval private(title: String, order: Int, atLeast: Int, atMostInclu
 }
 
 object Interval {
-  private final val finiteInterval = "^([1-9][0-9]?)-([1-9][0-9]?)$".r
+  private final val finiteInterval = "^([0-9]{1,2})-([1-9][0-9]?)$".r
   private final val infiniteInterval = "^>([1-9][0-9]?)".r
 
   def apply(expr: String, order: Int): Interval = {
     expr match {
-      case finiteInterval(atLeast, atMostExclusive) =>
+      case finiteInterval(atLeast, atMostExclusive) if atLeast < atMostExclusive =>
         apply(
           title = expr concat " months",
           order = order,
