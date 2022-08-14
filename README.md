@@ -11,6 +11,6 @@ by the product creation date, and partition them into the interval formats given
     ```
   * 2) Or also pass the grouping intervals (if you chose the first one, default intervals would be considered):
     ```shell
-    java -jar orders.jar "2018-01-01 00:00:00" "2019-01-01 00:00:00" 0-3 4-7 >12
+    java -jar orders.jar "2018-01-01 00:00:00" "2019-01-01 00:00:00" 0-3 4-7 \>12
     ```
   
