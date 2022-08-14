@@ -1,6 +1,6 @@
 import models.{Arguments, Interval}
 import process.OrderProcess
-import repo.impl.OrderItemsRepoImpl
+import repo.impl.OrderRepoImpl
 
 import java.util.concurrent.TimeUnit
 import scala.concurrent.duration.FiniteDuration
@@ -10,9 +10,9 @@ import scala.util.{Failure, Success}
 object Main {
 
   lazy val defaultIntervals = Seq(
-    Interval("1-3", 1),
-    Interval("4-6", 2),
-    Interval("7-12", 3),
+    Interval("0-3", 1),
+    Interval("4-7", 2),
+    Interval("8-11", 3),
     Interval(">12", 4),
   )
 
@@ -21,7 +21,7 @@ object Main {
     val taskTimeoutValue = bootstrap.config.getInt("taskTimeoutValue")
     val taskTimeoutUnit = TimeUnit.valueOf(bootstrap.config.getString("taskTimeoutUnit"))
 
-    val orderProcess = new OrderProcess(new OrderItemsRepoImpl)
+    val orderProcess = new OrderProcess(new OrderRepoImpl())
 
     Parser.parseArguments(args)(defaultIntervals) match {
       case Failure(exception) =>
@@ -36,6 +36,7 @@ object Main {
           case (intervalTitle, count) =>
             println(s"$intervalTitle: $count orders")
         }
+        sys.exit(0)
     }
   }
 
