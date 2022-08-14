@@ -11,8 +11,6 @@ trait OrderItemsRepo {
 
   def getOrdersItems(orderIds: Seq[Long]): Future[Seq[OrderWithItemIds]]
 
-  def getOrdersItemsAndProductsWithinDateRange(start: LocalDateTime, end: LocalDateTime): Future[Seq[(Order, Item, DomainProduct)]]
-
   def upsert(orderItems: Seq[OrderItem]): Future[Int]
 
 }
